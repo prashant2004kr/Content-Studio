@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content Studio — MongoDB Content Management System</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta property="og:image" content="/logo.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" id="brandLink" title="Content Studio">
+      <img src="/logo-icon.png" alt="Content Studio Logo" class="brand-logo-img">
+      <span class="brand-text">Content <span class="brand-accent">Studio</span></span>
+    </a>
+    <nav><button id="showLibrary" class="nav-link">Library</button><button id="showEditor"
+        class="nav-link">Write</button></nav>
+    <div class="account"><span id="userLabel">Not signed in</span><button id="logoutBtn"
+        class="btn btn-ghost hidden">Log out</button></div>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">MONGODB CONTENT MANAGEMENT</p>
+        <h1>Ideas into <span>published stories.</span></h1>
+        <p class="muted">Create, organize, review, and publish content from one simple workspace.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-icon">
+          <img src="/logo-icon.png" alt="Content Studio" class="hero-icon-img">
+        </div>
+        <p class="eyebrow">YOUR WORKSPACE</p><strong id="heroCount">Explore the library</strong>
+        <p class="muted small">Search published articles or sign in to manage your drafts.</p>
+      </div>
+    </section>
+    <section id="authPanel" class="panel auth-panel">
+      <div class="auth-intro">
+        <img src="/logo.png" alt="Content Studio" class="auth-brand-logo">
+        <p class="eyebrow">GET STARTED</p>
+        <h2>Sign in to your workspace</h2>
+        <p class="muted">Create an account to write and manage content. The first registered account receives the admin
+          role.</p>
+      </div>
+      <form id="authForm" class="auth-form">
+        <div class="tabs"><button type="button" id="loginTab" class="tab active">Log in</button><button type="button"
+            id="registerTab" class="tab">Create account</button></div>
+        <label id="nameWrap" class="hidden">Name<input id="nameInput" autocomplete="name"
+            placeholder="Your name"></label>
+        <label>Email<input id="emailInput" type="email" required autocomplete="email"
+            placeholder="you@example.com"></label>
+        <label>Password<input id="passwordInput" type="password" required minlength="8" autocomplete="current-password"
+            placeholder="At least 8 characters"></label>
+        <button class="btn btn-primary" type="submit" id="authSubmit">Log in</button>
+        <p id="authMessage" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+    <section id="workspace">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">CONTENT WORKSPACE</p>
+          <h2 id="sectionTitle">Content library</h2>
+        </div><button class="btn btn-primary" id="newContentBtn">＋ New content</button>
+      </div>
+      <div id="libraryView">
+        <div class="toolbar"><input id="searchInput" placeholder="Search titles, body, or tags…"><select
+            id="statusFilter">
+            <option value="published">Published content</option>
+            <option value="draft">My drafts</option>
+            <option value="mine">My content</option>
+          </select><button class="btn btn-light" id="searchBtn">Search</button></div>
+        <div id="contentGrid" class="content-grid"></div>
+        <p id="emptyState" class="empty hidden">No content found. Create your first post.</p>
+      </div>
+      <div id="editorView" class="hidden">
+        <form id="contentForm" class="panel editor">
+          <input type="hidden" id="contentId">
+          <div class="form-grid"><label>Title<input id="titleInput" required maxlength="180"
+                placeholder="Give your content a title"></label><label>Category
+              <div class="category-row">
+                <select id="categoryInput">
+                  <option value="">No category</option>
+                </select>
+
+                <button type="button" class="btn btn-light" id="addCategoryBtn">
+                  + Add
+                </button>
+              </div>
+            </label></div>
+          <label>Short summary<input id="excerptInput" maxlength="400"
+              placeholder="A short description for the library"></label>
+          <label>Tags <span class="muted small">(comma-separated)</span><input id="tagsInput"
+              placeholder="security, mongodb, tutorial"></label>
+          <label>Body<textarea id="bodyInput" required rows="12"
+              placeholder="Write your content here…"></textarea></label>
+          <div class="editor-footer"><span id="editorMessage" class="message" aria-live="polite"></span>
+            <div class="actions"><button type="button" class="btn btn-light" id="cancelEditBtn">Cancel</button><button
+                type="submit" class="btn btn-light" data-status="draft">Save draft</button><button type="submit"
+                class="btn btn-primary" data-status="published">Publish</button></div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section id="publicLibrary" class="hidden">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LATEST STORIES</p>
+          <h2>Published content</h2>
+        </div>
+      </div>
+      <div class="toolbar"><input id="publicSearchInput" placeholder="Search published content…"><button
+          class="btn btn-light" id="publicSearchBtn">Search</button></div>
+      <div id="publicGrid" class="content-grid"></div>
+    </section>
+    <div id="toast" class="toast hidden" role="status"></div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <img src="/logo-icon.png" alt="" class="footer-logo-img">
+      <p>Content Studio <span>•</span> Built with Express and MongoDB</p>
+    </div>
+  </footer>
+  <script src="/app.js"></script>
+</body>
+
+</html>
